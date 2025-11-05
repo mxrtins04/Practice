@@ -22,7 +22,9 @@ public class TurtleGraphicsFunctions{
 				floor[arrayOne][arrayTwo] = "o";
 				arrayTwo++;
 			}
+			arrayOne++;
 		}
+			
 	}
 
 	
@@ -39,9 +41,9 @@ public class TurtleGraphicsFunctions{
 			direction = 4;
 		}
 
-	public void moveForward(int steps, int row, int column){
+	public int[] moveForward(int steps, int row, int column, boolean penDown){
 		if (steps <= 0)
-		return;
+		return null;
 			
 		int progress = 0;
 		while (progress < steps){
@@ -70,6 +72,8 @@ public class TurtleGraphicsFunctions{
 			floor[row][column] = "*";
 		progress++;
 		}
+	
+		return new int[]{row, column};
 	}
 
 

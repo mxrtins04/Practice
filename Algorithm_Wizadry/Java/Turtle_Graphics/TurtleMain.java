@@ -2,13 +2,14 @@ public class TurtleMain {
     public static void main(String[] args) {
         TurtleGraphicsFunctions function = new TurtleGraphicsFunctions();
 	String[][] floor = new String[20][20];
+	function.graphicsFunction();
 	int row = 0;
 	int column = 0;
 	int direction = 1;
         String[] commands = {
             "2", "5,12", "3", "5,12", "3", "5,12", "3", "5,12", "1", "6", "9"};
 
-	boolean penDown;
+	boolean penDown = true;
 	int index = 0;
 
 	
@@ -35,8 +36,11 @@ public class TurtleMain {
 			steps = Integer.parseInt(movement);
 		
 
-			if (steps > 0)
-				function.moveForward(steps, row, columni);
+			if (steps > 0){
+				function.moveForward(steps, row, column, penDown);
+				int[] currentPosition = function.moveForward(steps, row, column, penDown);
+				row = currentPosition[0];
+				column = currentPosition[1];}
 		} 
 	
 		else if (command.equals("6")) {
