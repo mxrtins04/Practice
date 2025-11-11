@@ -1,70 +1,35 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class StudentGradeFunctions{
-	
-/*	ArrayList<Integer> scoresOfStudents = new ArrayList<>();
-	ArrayList<Integer> position = new ArrayList<>();
-	ArrayList<Integer> totalScoresOfStudents = new ArrayList<>();
-	ArrayList<Integer> averageScores = new ArrayList<>();
-	*/
-
-	
-
-
-
-
-
-
 
 	ArrayList<Subject> subjects = new ArrayList<>();
-
-	public int getNumberOfSubjectsOffered(ArrayList<Subject> subjects){
-		numberOfSubjects = subjects.size();
-		return numberOfSubjects;
-	}
-
-	public Integer validateScore(String score){
-		try{
-			return Integer.parseInt(score);
-		}
-		catch (NumberFormatException e) {
-			//System.out.println("Please put in a number");
-			return null;}	
-	}
-
+	ArrayList<Student> students = new ArrayList<>();
 
 	
-
-	public int [][] addStudent(int count, int [][] studentRecords){
-		studentRecords[count][0] = count;
-		return studentRecords;
+	public static void showClassSummary(ArrayList<Student> students, ArrayList<Subject> subjects) {
+	if (students.isEmpty()) {
+		System.out.println("No students yet.");
+		return;
 	}
 
-	public int [][] addScores(int count, int count2, int score, int [][] studentRecords){
-		studentRecords[count][count2] = score;
-		return studentRecords;
+	System.out.printf("%15s", "Student");
+	for (Subject subject : subjects) {
+		System.out.printf("%-12s", subject.getSubjectName());
 	}
+	System.out.printf("%10s%10s%n", "Total", "Average");
 
-	public String validateString(String name){
-		for(char c : name.toCharArray()){
-			if(!Character.isLetter(c))
-			return(null);}
-		return name;
-	}
-
-	public int getStudentTotal(int index, int [][]studentRecord, int total, ArrayList<Integer> totalScoresOfStudents){
-		for( int score : studentRecord[index] ){
-			total += score;}
-		totalScoresOfStudents.add(total);
-		return total;
+	for (int index = 0; index < students.size(); index++) {
+		Student student = students.get(index);
+		System.out.printf("%15s", student.getName());
+		for (int index2 = 0; index2 < subjects.size(); index2++) {
+			System.out.printf("%12.2f", student.getScores().get(index2));
 		}
-	
-	public double calculateStudentAverage(int index, int [][]studentRecord, int total){
-		int length = studentRecord[index].length;
-		double average = (double) total / length;
-		return average;
+		System.out.printf("%10.2f%10.2f%n", s.getTotalScore(), s.getAverageScore());
 	}
+}
+
 
 	public ArrayList<Integer> getPositionOfStudent( ArrayList<Integer> position, ArrayList<Integer> total){
 		

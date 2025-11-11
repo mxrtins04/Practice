@@ -1,68 +1,109 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class StudentGrade{
 public static void main(String [] args){
 
+	Scanner input = new Scanner(System.in);
+
 	ArrayList<Subject> subjects = new ArrayList<>();
 	ArrayList<Student> students = new ArrayList<>();
 	StudentGradeFunctions function = new StudentGradeFunctions();
-	int numberOfSubjects = subjects.size;
+	int numberOfSubjects = 0;
+	
 	
 	while(true){
 		System.out.print("What subjects are your students offering? ");
-		String subjectName = input.next();
+		String subjectName = input.nextLine().trim();
+		if (subjectName.isEmpty()){
+			System.out.println("Empty name not allowed.");
+			continue; }
 		Subject subject = new Subject(subjectName);
+		subjects.add(subject);
+		System.out.println("Would you like to add more subjects(Yes/No)? ");
+		String response = input.nextLine().trim();
+		if (response.equalsIgnoreCase("no")) 
+			break;
+		if( response.equalsIgnoreCase("yes"))
+			continue;
+		else
+			System.out.println("please put in a yes or a no");
+	}	
 
-		while(true){
-		System.out.println("Would you like to add more subjects(Y/N)? ");
-		String response = input.nextLine();
-		Switch (response){
-			case "yes": 
-				"Input the next subject: ";
-				String subjectName = input.next();
-				Subject subject = new Subject(subjectName);
-				subjects.add(subject);
-				continue;
-			case "no": break;
-			default: "please put in a yes or a no";}}
-		
-		subjects = int[numberOfSubjects];
+		numberOfSubjects = subjects.size();	
+			while(true){
+				System.out.print("Put in the names of your students: ");
+				String studentName = input.nextLine().trim();
 
-		
-
-		System.out.print("Please put in the names of your students: ");
-		String studentName = input.nextLine();
-		Student student = new Student(studentName, numberOfSubjects);
-
-		while(true){
-			System.out.println("Would you like to add one more student(Y/N)? ");
-			String respones = input.nextLine();
-			Switch (response){
-				case "yes": 
-				"Input the name of the student: ";
-				String studentName = input.nextLine();
+				if (studentName.isEmpty()) {
+					System.out.println("Empty name not allowed.");
+					continue;}
+				
 				Student student = new Student(studentName, numberOfSubjects);
 				students.add(student);
-				continue;
-			case "no": break;
-			default: "please put in a yes or a no";}}
+				System.out.printf("%s added.", studentName);
 
-		
-		
-		for( Subject subject : subjects ){
-			for( Student student : students ){
-				System.out.printf("Input %s's score for %s: ", student, subject);
-				int score = input.nextInt
+				System.out.println("Would you like to add another student(Yes/No)? ");
+				String response = input.nextLine().trim();
+				if (response.equalsIgnoreCase("no")){
+					System.out.print("Student names are: ");
+					break;}
+				if (!response.equalsIgnoreCase("yes")) {
+					System.out.println("Type yes or no."); 						continue;
+				}
+				
 			}
-		}
-		
+			
+				for( Subject subjectCase : subjects ){
+					int index = 0;
+					for( Student studentCase : students ){
+						while(true){
+						System.out.printf("Input %s's score for %s: ", studentCase.getName(), subjectCase.getSubjectName());
+						String rawScore = input.nextLine();
+						int score = studentCase.setScore(rawScore);
+						if( score == -1 ){
+							System.out.println("Score must be in the range of 1 - 100");
+							continue;}
+						if( score == -2 ){
+							System.out.println("Score must be a number");
+						}
+						studentCase.addScore(index, score);
+						subjectCase.addStudent(studentCase);
+	System.out.printf("%n%s added.", studentCase.getName());
+						break;
+					}}
+					index++;
+				}
+				
+				while(true){
+					System.out.print("""
+							All data have been collected and stored. What would you like to do now:
+								1. Get class summary.
+								2. Get subject summary.
+								3. Exit.""");
+					
+					int response3 = input.nextInt();
+					input.nextLine();
+					
+					switch(response3){
+						case 1: 
+							function.showClassSummary(students, subjects);
+							
+							break;
+						case 2:
+							break;
+						case 3:
+							break;
+						default:
+							break;
+	}
+	}}}
 
 
 
 
-
-
+/*
 
 		if( numberOfStudents == null || numberOfStudents > 100 || numberOfStudents < 0	){
 			System.out.println("Please put in a valid number!!!");
@@ -249,7 +290,5 @@ public static void main(String [] args){
 		}
 	
 		System.out.printf("%nThe hardest subject is subject %d, with %d fails", hardestSubject + 1, highestFail);
-		System.out.printf("%nThe easiest subject is subject %d, with %d passes", easiestSubject + 1, highestPass );
+		System.out.printf("%nThe easiest subject is subject %d, with %d passes", easiestSubject + 1, highestPass );*/
 
-}
-}

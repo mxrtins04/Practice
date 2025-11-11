@@ -18,10 +18,14 @@ public class StudentGradeTest {
 
 	ArrayList<String> names = new ArrayList<>();
 	StudentGradeFunctions function;
+	Student student;
+	Subject subject;
 
 	@BeforeEach
 	void setup() {
 		function = new StudentGradeFunctions();
+		subject = new Subject(subjectName);
+		student = new Student(studentName);
     }
 
 	@Test

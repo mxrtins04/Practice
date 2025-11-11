@@ -2,37 +2,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Subject {
-	private String name;
-	private static String topStudent;
-	private static String dullestStudent;
+	private String subjectName;
+	private String topStudent;
+	private String dullestStudent;
 	private ArrayList<Student> students;
 
 	public Subject(String name) {
-		this.name = name;
+		this.subjectName = subjectName;
+		this.students = new ArrayList<>();
 		
 	}
 
-	public ArrayList<Student> addName(Student name){
-		students.add(name);
-		return names;
+	public void addStudent(Student student){
+		students.add(student);
+	
 	}
+	
+	public ArrayList<Student> getStudents() {
+    	    return students;
+	    }
+	
 
 	public String setTopStudent(String topStudentName){
 		this.topStudent = topStudentName;
+		return topStudentName;
 	}
 
 	public String setDullestStudent(String dullestStudentName){
 		this.dullestStudent = dullestStudentName;
+		return dullestStudentName;
 	}
 
 
-	public String getName() {
-		return name;
+	public String getSubjectName() {
+		return subjectName;
 	}
 
-	public int getScore() {
-		return score;
-	}
-
+	public String getTopStudent() {
+		return topStudent;
+    }
 	
+
+	public String getDullestStudent() {
+	        return dullestStudent;
+		}
 }
