@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Student {
 	private String name;
 	private Subject[] subjects;
-	private int[] scores;
+	private int position;
 
 	public Student(String name, int numberOfSubjects) {
 		this.name = name;
