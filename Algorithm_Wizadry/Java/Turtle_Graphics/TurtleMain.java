@@ -1,13 +1,14 @@
+import java.util.Arrays;
 public class TurtleMain {
     public static void main(String[] args) {
         TurtleGraphicsFunctions function = new TurtleGraphicsFunctions();
-	String[][] floor = new String[20][20];
+	String[][] floor = new String[2][10];
 	function.graphicsFunction();
 	int row = 0;
 	int column = 0;
 	int direction = 1;
         String[] commands = {
-            "2", "5,12", "3", "5,12", "3", "5,12", "3", "5,12", "1", "6", "9"};
+            "2", "5,4","6", "9"};
 
 	boolean penDown = true;
 	int index = 0;
@@ -44,7 +45,8 @@ public class TurtleMain {
 		} 
 	
 		else if (command.equals("6")) {
-			function.displayFloor(row, column);
+			String[][] display = function.displayFloor(floor, row, column);
+			System.out.print(Arrays.deepToString(display));
 		} 
 		else if (command.equals("9")) {
 			break;

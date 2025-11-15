@@ -41,15 +41,18 @@ public class TurtleGraphicsFunctions{
 			direction = 4;
 		}
 
-	public int[] moveForward(int steps, int row, int column, boolean penDown){
+	public int[] moveForward(int steps, int row, int column, boolean penDown, String[][] floor){
 		if (steps <= 0)
 		return null;
-			
+		if (penDown == true)
+				floor[row][column] = "*";
+
 		int progress = 0;
 		while (progress < steps){
+			
 			if( direction ==1 ) {
 				if( column + 1 >= 20 )
-			break;
+					break;
 		column = column + 1;
 			}
 		else if (direction == 2) {
@@ -67,9 +70,6 @@ public class TurtleGraphicsFunctions{
 				break;
 		row = row - 1;
            	}
-
-		if (penDown == true)
-			floor[row][column] = "*";
 		progress++;
 		}
 	
