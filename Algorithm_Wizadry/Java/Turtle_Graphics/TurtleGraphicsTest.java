@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 public class TurtleGraphicsTest{
@@ -43,10 +44,10 @@ public class TurtleGraphicsTest{
 		function.graphicsFunction();
 		int row = 0;
 		int column = 0;
-		function.moveForward(14, row, column, penDown);
-
-		String actual = function.displayFloor(row, column);
-		String expected = function.displayFloor(12, 0);
+		function.moveForward(14, row, column, penDown, floor);
+		
+		String actual = floor[10][0];
+		String expected = "*";
 	
 		assertEquals(actual, expected);
 
@@ -96,5 +97,31 @@ public class TurtleGraphicsTest{
 		
 	}
 	
+	@Test
+	public void testThatTurtlesDirectionDoesntExceedFour(){
+		function.turnRight();
+		function.turnRight();
+		function.turnRight();
+		function.turnRight();
+		assertEquals(1, function.direction);
+		
+	}
 	
+	@Test
+	public void testThatDirectionIsNeverNegative(){
+		function.turnLeft();
+		assertEquals(4, function.direction);
+		
+	}
+	
+	@Test
+	public void testThatMoveForwardDoesntTakeInNegativeNumbersAsNumberOfSteps(){
+		int row = 0;
+		int column = 0;
+		
+		int[] newPosition = function.moveForward(-10, row, column, penDown, floor);
+		
+		assertNull(newPosition);
+	}
+
 }
