@@ -115,7 +115,7 @@ function handlePizzaOrder(pizzaName: string): void {
 }
 
 function displayOrderHistory(): void {
-    console.log('\n📋 Order History:');
+    console.log('\n Order History:');
     if (orderHistory.length === 0) {
         console.log('No orders yet.');
     } else {

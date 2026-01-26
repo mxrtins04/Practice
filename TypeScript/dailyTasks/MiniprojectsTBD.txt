@@ -1,0 +1,441 @@
+WEEK 1: TypeScript + Node.js Foundations + REST APIs
+Day 1 - TypeScript Fundamentals
+Concepts: Types, interfaces, generics
+Mini-Project: Library Book Manager
+
+Create Book interface (title, author, ISBN, available)
+Functions: addBook, searchByAuthor, checkoutBook, returnBook
+Practice: Interfaces, arrays, boolean logic, optional properties
+
+
+Day 2 - Node.js Runtime & Event Loop
+Concepts: Async/await, promises, event loop
+Mini-Project: File Backup Simulator
+
+Simulate backing up multiple files (use setTimeout to mimic async operations)
+Track: which files are processing, which are done, which failed
+Practice: Promises, async/await, Promise.all vs sequential
+
+
+Day 3 - REST API Design
+Concepts: Express, routes, HTTP methods
+Mini-Project: Recipe API
+
+Endpoints: POST /recipes, GET /recipes, GET /recipes/:id, DELETE /recipes/:id
+Store recipes in memory (array)
+Practice: REST principles, Express routing, status codes
+
+
+Day 4 - HTTP Deep Dive
+Concepts: Headers, status codes, request/response
+Mini-Project: URL Shortener API
+
+POST /shorten - create short URL
+GET /:shortCode - redirect to original URL
+Track click count for each URL
+Practice: HTTP redirects (301/302), headers, proper status codes
+
+
+Day 5 - Testing & Documentation
+Concepts: Unit tests, integration tests, Jest
+Mini-Project: String Utilities Library
+
+Functions: capitalize, reverse, isPalindrome, countWords, truncate
+Write tests for each function
+Test edge cases (empty strings, special characters)
+Practice: Jest, test coverage, edge case thinking
+
+
+Day 6 - Rate Limiter (Saturday Project)
+Already in plan - build rate limiter from scratch
+
+Day 7 - Review Day
+Write blog post or review week
+
+WEEK 2: Databases & Data Persistence
+Day 8 - SQL Fundamentals
+Concepts: SELECT, WHERE, JOIN, ORDER BY
+Mini-Project: Movie Database
+
+Tables: movies, actors, movie_actors (many-to-many)
+Queries: Find all movies by actor, find highest-rated movies, movies by year
+Practice: JOINs, aggregations, filtering
+
+
+Day 9 - Advanced SQL & Relationships
+Concepts: Normalization, foreign keys, indexes
+Mini-Project: School Database
+
+Tables: students, courses, enrollments, grades
+Design proper relationships and constraints
+Queries: Student GPA, course averages, enrollment reports
+Practice: Database design, normalization, complex queries
+
+
+Day 10 - ORMs (Prisma)
+Concepts: Prisma schema, migrations, queries
+Mini-Project: Blog Post Manager
+
+Models: User, Post, Comment (with relationships)
+CRUD operations using Prisma
+Practice: Prisma schema, relations, migrations
+
+
+Day 11 - Transactions & Data Integrity
+Concepts: ACID, transactions, rollbacks
+Mini-Project: Bank Account Transfer System
+
+Transfer money between accounts (must be transactional)
+Handle: insufficient funds, account not found
+Ensure: Both debit and credit happen or neither happens
+Practice: Transactions, error handling, data consistency
+
+
+Day 12 - Query Optimization
+Concepts: Indexes, EXPLAIN, N+1 queries
+Mini-Project: E-commerce Product Search
+
+Products with categories, tags, reviews
+Implement: Search by name, filter by price range, sort by rating
+Optimize: Add proper indexes, avoid N+1
+Practice: Performance optimization, indexing strategy
+
+
+Day 13 - Database Connection Pool (Saturday)
+Already in plan
+
+Day 14 - Review Day
+
+WEEK 3: Authentication, Authorization & Security
+Day 15 - Password Hashing
+Concepts: bcrypt, salts, hashing
+Mini-Project: User Signup/Login System (CLI)
+
+Register user with hashed password
+Login verification
+Password strength checker
+Practice: bcrypt, password security, validation
+
+
+Day 16 - JWT & Token Auth
+Concepts: JWT structure, token generation, verification
+Mini-Project: API Key Manager
+
+Generate API keys for users
+Validate API keys on requests
+Track: key usage, expiration, rate limits per key
+Practice: Token generation, validation, middleware
+
+
+Day 17 - Authorization & RBAC
+Concepts: Roles, permissions, access control
+Mini-Project: Document Permission System
+
+Users have roles: viewer, editor, admin
+Documents have owners and shared users
+Check: Can user view/edit/delete this document?
+Practice: Role-based access, permission checking
+
+
+Day 18 - Security Best Practices
+Concepts: XSS, CSRF, SQL injection prevention
+Mini-Project: Input Sanitizer Library
+
+Functions: sanitizeHTML, validateEmail, sanitizeSQL, sanitizeFilename
+Test with malicious inputs
+Practice: Input validation, security awareness
+
+
+Day 19 - Session Management
+Concepts: Refresh tokens, token rotation, logout
+Mini-Project: Multi-Device Session Manager
+
+Users can login from multiple devices
+Track: active sessions per user
+Functions: logout single device, logout all devices
+Practice: Session storage, token management
+
+
+Day 20 - OAuth2 Provider (Saturday)
+Already in plan
+
+Day 21 - Review Day
+
+WEEK 4: Real-time Features, Caching & Performance
+Day 22 - WebSocket Fundamentals
+Concepts: Bi-directional communication, Socket.io
+Mini-Project: Simple Chat Room
+
+Users join a room
+Broadcast messages to all in room
+Show "user is typing" indicator
+Practice: WebSocket events, broadcasting, rooms
+
+
+Day 23 - Redis Fundamentals
+Concepts: Redis data structures, SET/GET, TTL
+Mini-Project: Session Store
+
+Store user sessions in Redis
+Set expiration times
+Track: online users, recently active users
+Practice: Redis strings, hashes, expiration
+
+
+Day 24 - Caching Strategies
+Concepts: Cache-aside, write-through, cache invalidation
+Mini-Project: News Article Cache
+
+Fetch articles from "API" (simulated delay)
+Cache articles in Redis
+Invalidate cache when article updated
+Track: cache hits/misses
+Practice: Caching patterns, TTL, invalidation
+
+
+Day 25 - Background Jobs & Queues
+Concepts: Job queues, Bull, async processing
+Mini-Project: Email Queue Simulator
+
+Add emails to queue
+Process queue (simulate sending)
+Handle: retries on failure, dead letter queue
+Track: pending, processing, completed, failed
+Practice: Job queues, retry logic, error handling
+
+
+Day 26 - API Performance
+Concepts: Compression, pagination, field selection
+Mini-Project: Large Dataset API
+
+Endpoint returns 10,000 items
+Implement: cursor pagination, field filtering, compression
+Benchmark: Before/after optimization
+Practice: Performance optimization techniques
+
+
+Day 27 - Pub/Sub System (Saturday)
+Already in plan
+
+Day 28 - Review Day
+
+WEEK 5: File Uploads, Email, Advanced Features
+Day 29 - File Upload & Storage
+Concepts: Multer, file validation, streaming
+Mini-Project: Image Upload Service
+
+Upload image files
+Validate: file type, size
+Store with unique filenames
+Return: file metadata
+Practice: File handling, validation, storage
+
+
+Day 30 - Cloud Storage
+Concepts: S3, presigned URLs, multipart uploads
+Mini-Project: File Sharing Service
+
+Upload files to S3
+Generate temporary download links (presigned URLs)
+Track: file owner, upload date, download count
+Practice: Cloud storage integration, presigned URLs
+
+
+Day 31 - Email Service
+Concepts: SendGrid/Resend, templates, transactional emails
+Mini-Project: Email Newsletter System
+
+Subscribe/unsubscribe users
+Send welcome email on signup
+Send newsletter to all subscribers
+Track: delivery status, open rate (simulated)
+Practice: Email templates, bulk sending, tracking
+
+
+Day 32 - Logging & Monitoring
+Concepts: Structured logging, metrics, tracing
+Mini-Project: Request Logger Middleware
+
+Log all API requests with: timestamp, method, path, duration, status
+Track errors with full context
+Generate daily report: most accessed endpoints, error rates
+Practice: Structured logging, metrics collection
+
+
+Day 33 - Error Handling & Resilience
+Concepts: Circuit breaker, retries, graceful degradation
+Mini-Project: Resilient API Client
+
+Call external API with retries (exponential backoff)
+Implement circuit breaker (stop calling if too many failures)
+Fallback: Return cached data if API down
+Practice: Retry logic, circuit breaker pattern, fallbacks
+
+
+Day 34 - Notification System (Saturday)
+Already in plan
+
+Day 35 - Review Day
+
+WEEK 6: API Design, Documentation & Testing
+Day 36 - API Versioning
+Concepts: URL versioning, header versioning, deprecation
+Mini-Project: Versioned Weather API
+
+v1: Returns temperature in Celsius
+v2: Returns temp in both C and F, adds humidity
+Support both versions simultaneously
+Add deprecation warning to v1
+Practice: API versioning strategies, backward compatibility
+
+
+Day 37 - Advanced REST / tRPC
+Concepts: HATEOAS, hypermedia, type-safe APIs
+Mini-Project: Bookstore API with HATEOAS
+
+Each book response includes links to: author, reviews, similar books
+Navigate API using links (discoverability)
+Practice: Hypermedia, API discoverability
+
+
+Day 38 - API Documentation
+Concepts: OpenAPI/Swagger, interactive docs
+Mini-Project: Pet Store API (Documented)
+
+Simple CRUD for pets
+Full Swagger documentation
+Interactive docs at /api-docs
+Practice: OpenAPI spec, documentation generation
+
+
+Day 39 - Integration Testing
+Concepts: Test database, fixtures, test coverage
+Mini-Project: Authentication System Tests
+
+Test: signup, login, token refresh, logout flows
+Use test database with fixtures
+Aim for >80% coverage
+Practice: Integration testing, test data management
+
+
+Day 40 - Load Testing
+Concepts: k6, Artillery, performance metrics
+Mini-Project: Load Test Suite
+
+Create load tests for a simple API
+Test: 10, 50, 100, 500 concurrent users
+Identify: breaking point, bottlenecks
+Generate: performance report
+Practice: Load testing, performance analysis
+
+
+Day 41 - API Gateway (Saturday)
+Already in plan
+
+Day 42 - Review Day
+
+WEEK 7: Microservices, Docker & Deployment
+Day 43 - Docker Fundamentals
+Concepts: Containers, Dockerfile, images
+Mini-Project: Multi-Service Docker Setup
+
+Containerize: Node.js app, PostgreSQL, Redis
+Docker Compose to run all together
+Practice: Dockerfile, docker-compose.yml, networking
+
+
+Day 44 - Microservices Architecture
+Concepts: Service boundaries, communication
+Mini-Project: Order Processing System
+
+Services: Order Service, Inventory Service, Payment Service
+Flow: Create order → Check inventory → Process payment
+Practice: Service communication, distributed logic
+
+
+Day 45 - Message Queues & Events
+Concepts: RabbitMQ, event-driven architecture
+Mini-Project: Event-Driven Order System
+
+Services publish events: OrderCreated, PaymentProcessed, OrderShipped
+Other services subscribe and react
+Practice: Pub/sub, event-driven design, decoupling
+
+
+Day 46 - Deployment & CI/CD
+Concepts: GitHub Actions, Railway/Render, environments
+Mini-Project: Auto-Deploy Pipeline
+
+Push to GitHub → Tests run → Deploy to staging
+Merge to main → Deploy to production
+Practice: CI/CD, automated deployment
+
+
+Day 47 - Monitoring in Production
+Concepts: Logging, tracing, alerting
+Mini-Project: Production Monitoring Dashboard
+
+Centralized logs
+Error tracking
+Performance metrics
+Alerts for: errors, high latency, downtime
+Practice: Observability, production debugging
+
+
+Day 48 - Saturday Project (Rust)
+Already in plan
+
+Day 49 - Review Day
+
+WEEK 8: Interview Prep & Polish
+Day 50 - Documentation
+Concepts: README, architecture docs, API docs
+Mini-Project: Documentation Template
+
+Create reusable README template
+Include: setup, architecture, API reference, deployment
+Practice: Technical writing, documentation
+
+
+Day 51 - System Design Practice
+Concepts: System design framework
+Mini-Project: Design Document
+
+Pick a system: Instagram feed, URL shortener, chat app
+Write full design doc: requirements, architecture, scaling, tradeoffs
+Practice: System design thinking, documentation
+
+
+Day 52 - Behavioral Prep
+Concepts: STAR format, storytelling
+Mini-Project: Story Bank
+
+Write 5 STAR stories from your 8-week journey
+Include: technical challenges, teamwork, failures, learning
+Practice: Interview storytelling
+
+
+Day 53 - Code Review
+Concepts: SOLID, design patterns, code quality
+Mini-Project: Code Review Checklist
+
+Review all DevTrack code
+Create checklist: security, performance, readability, patterns
+Refactor one messy module completely
+Practice: Code quality awareness
+
+
+Day 54 - Interview Questions
+Concepts: Common backend topics
+Mini-Project: Interview Answer Guide
+
+Write answers to 20 common questions
+Topics: REST vs GraphQL, SQL vs NoSQL, caching, auth, scaling
+Practice: Articulating concepts clearly
+
+
+Day 55 - Demo Day
+Already in plan - record demo video
+
+Day 56 - Launch Day
+Already in plan - finalize everything
