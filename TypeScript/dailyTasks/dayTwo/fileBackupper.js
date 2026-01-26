@@ -76,10 +76,10 @@ function uploadFile(file) {
                     }
                     else {
                         file.status = "failed";
-                        console.log("{file.name} has been backed up failed");
+                        console.log("failed");
                     }
                     endTime = Date.now();
-                    console.log("Time taken: ".concat(endTime - startTime));
+                    console.log("Time taken: ".concat((endTime - startTime) / 1000));
                     return [2 /*return*/];
             }
         });

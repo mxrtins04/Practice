@@ -48,7 +48,7 @@ async function uploadFile(file : BackupFile) {
         console.log(`failed`)
     }
     let endTime = Date.now();
-    console.log(`Time taken: ${endTime - startTime}`);
+    console.log(`Time taken: ${(endTime - startTime) / 1000}`);
 }
 
 uploadFile(file1);
