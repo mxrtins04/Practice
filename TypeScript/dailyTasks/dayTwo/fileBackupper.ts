@@ -4,9 +4,10 @@ type BackupFile ={
     status : "processing" | "completed" | "failed";
 }
 
+
 const backupFiles: BackupFile[] = [
     {
-        name: "file1.txt",
+        name: "jungleJustice.txt",
         size: 10,
         status: "processing"
     },
@@ -22,7 +23,8 @@ const backupFiles: BackupFile[] = [
     }
 ]
 
-let startTime = Date.now();
+let file1 : BackupFile = backupFiles[0];
+
 
 function getDelayTime(file : BackupFile) {
     let ms = file.size * 100;
@@ -32,6 +34,21 @@ function getDelayTime(file : BackupFile) {
 
 const delay = (ms : number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function uploadFile(file : BackupFile) {
-    failure
+async function uploadFile(file : BackupFile) {
+    let startTime = Date.now();
+    let successOrFailure = Math.random();
+    let delayTime = getDelayTime(file);
+    console.log("Backing up your file...");
+    await delay(delayTime);
+    if(successOrFailure >= 0.2) {
+        file.status = "completed";
+        console.log(`${file.name} has been backed up succesfuly`)
+    } else {
+        file.status = "failed";
+        console.log(`failed`)
+    }
+    let endTime = Date.now();
+    console.log(`Time taken: ${endTime - startTime}`);
 }
+
+uploadFile(file1);
