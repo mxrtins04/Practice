@@ -47,10 +47,16 @@ app.get("/recipes", (req: Request, res: Response) => {
 });
 
 app.get("/recipes/:id", (req: Request, res: Response) => {
-    req.params= {"id": "1769641724631"}
+
     const id = req.params.id;
     const recipe = recipes.find(r => r.id === id);
     res.json(recipe);
 });
 
-app.delete("rec")
+app.delete("/recipes/:id", (req: Request, res: Response) => {
+
+  const id = req.params.id
+  
+  recipes = recipes.filter(r => r.id !== id);
+  res.json({message: `Recipe with id ${id} deleted successfully`});
+})

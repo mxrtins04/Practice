@@ -35,3 +35,8 @@ app.get("/recipes/:id", function (req, res) {
     var recipe = recipes.find(function (r) { return r.id === id; });
     res.json(recipe);
 });
+app.delete("/recipes/:id", function (req, res) {
+    var id = req.params.id;
+    recipes = recipes.filter(function (r) { return r.id !== id; });
+    res.json({ message: "Recipe with id ".concat(id, " deleted successfully") });
+});
