@@ -1,0 +1,17 @@
+=== Testing School Admission System ===
+
+Testing student with GPA 3.8:
+Student saved: Student{name='Alice Johnson', gpa=3.8, admitted=true}
+
+Testing student with GPA 3.2:
+Denied
+
+Testing student with GPA 3.5:
+Denied
+
+Testing student with GPA 4.0:
+Student saved: Student{name='Diana Prince', gpa=4.0, admitted=true}
+
+=== All Admitted Students ===
+Student{name='Alice Johnson', gpa=3.8, admitted=true}
+Student{name='Diana Prince', gpa=4.0, admitted=true}
