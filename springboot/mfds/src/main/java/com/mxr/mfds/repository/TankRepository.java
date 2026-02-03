@@ -15,4 +15,6 @@ public interface TankRepository extends JpaRepository<Tank, Long> {
     Optional<Tank> findFirstByFuelId(Long fuelId);
 
     List<Tank> findByCurrentQuantityLessThan(Double threshold);
+
+    Optional<Tank> findByFuelName(String fuelName);
 }

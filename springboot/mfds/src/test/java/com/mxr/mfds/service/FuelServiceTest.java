@@ -19,7 +19,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.mxr.mfds.entity.Fuel;
+import com.mxr.mfds.entity.Tank;
 import com.mxr.mfds.repository.FuelRepository;
+import com.mxr.mfds.repository.TankRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class FuelServiceTest {
@@ -27,14 +29,27 @@ public class FuelServiceTest {
     @Mock
     private FuelRepository fuelRepository;
 
+    @Mock
+    private TankRepository tankRepository;
+
     @InjectMocks
     private FuelService fuelService;
 
     @Test
     void shouldCreateFuel_WhenNameAndPriceProvided() {
-        Fuel fuel = fuelService.createFuel("Diesel", new BigDecimal(1.5));
-        assertEquals("Diesel", fuel.getName());
-        assertEquals(new BigDecimal(1.5), fuel.getPricePerLiter());
+        Fuel expectedFuel = new Fuel(1L, "Diesel", new BigDecimal(1.5));
+
+        when(fuelRepository.existsByName("Diesel")).thenReturn(false);
+        when(fuelRepository.save(any(Fuel.class))).thenReturn(expectedFuel);
+
+        Fuel result = fuelService.createFuel("Diesel", new BigDecimal(1.5));
+
+        assertEquals("Diesel", result.getName());
+        assertEquals(new BigDecimal(1.5), result.getPricePerLiter());
+        assertEquals(1L, result.getId());
+        verify(fuelRepository).existsByName("Diesel");
+        verify(fuelRepository).save(any(Fuel.class));
+        verify(tankRepository).save(any(Tank.class));
     }
 
     @Test

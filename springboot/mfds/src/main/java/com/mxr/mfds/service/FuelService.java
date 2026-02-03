@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mxr.mfds.entity.Fuel;
+import com.mxr.mfds.entity.Tank;
 import com.mxr.mfds.repository.FuelRepository;
+import com.mxr.mfds.repository.TankRepository;
 
 @Service
 public class FuelService {
@@ -16,14 +18,20 @@ public class FuelService {
     @Autowired
     private FuelRepository fuelRepository;
 
+    @Autowired
+    private TankRepository tankRepository;
+
     public Fuel createFuel(String name, BigDecimal pricePerLiter) {
         if (fuelRepository.existsByName(name)) {
             throw new IllegalArgumentException("Fuel with name '" + name + "' already exists");
         }
-        Fuel newFuel = new Fuel(null, name, pricePerLiter);
-        fuelRepository.save(newFuel);
-        return newFuel;
 
+        Fuel newFuel = new Fuel(null, name, pricePerLiter);
+        Fuel savedFuel = fuelRepository.save(newFuel);
+        Tank newTank = new Tank(null, 10000.0, 0.0, savedFuel);
+        tankRepository.save(newTank);
+
+        return savedFuel;
     }
 
     public Fuel getFuelById(Long id) {
