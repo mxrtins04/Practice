@@ -52,4 +52,50 @@ public class TankService {
         Tank tank = getTankById(tankId);
         return tank.getCapacity() - tank.getCurrentQuantity();
     }
+
+    public Tank dispenseFuel(Long tankId, Double litersToDispense) {
+        Tank tank = getTankById(tankId);
+
+        if (litersToDispense <= 0) {
+            throw new IllegalArgumentException("Liters to dispense must be positive");
+        }
+
+        if (tank.getCurrentQuantity() < litersToDispense) {
+            throw new IllegalArgumentException("Insufficient fuel in tank. Available: " + tank.getCurrentQuantity()
+                    + "L, Requested: " + litersToDispense + "L");
+        }
+
+        Double newQuantity = tank.getCurrentQuantity() - litersToDispense;
+        tank.setCurrentQuantity(newQuantity);
+        return tankRepository.save(tank);
+    }
+
+    public Tank refillTank(Long tankId, Double litersToAdd) {
+        Tank tank = getTankById(tankId);
+
+        if (litersToAdd <= 0) {
+            throw new IllegalArgumentException("Liters to add must be positive");
+        }
+
+        Double newQuantity = tank.getCurrentQuantity() + litersToAdd;
+
+        if (newQuantity > tank.getCapacity()) {
+            throw new IllegalArgumentException("Cannot add " + litersToAdd + "L. Tank capacity: " + tank.getCapacity()
+                    + "L, Current: " + tank.getCurrentQuantity() + "L, Available space: "
+                    + (tank.getCapacity() - tank.getCurrentQuantity()) + "L");
+        }
+
+        tank.setCurrentQuantity(newQuantity);
+        return tankRepository.save(tank);
+    }
+
+    public Tank fillToCapacity(Long tankId) {
+        Tank tank = getTankById(tankId);
+        tank.setCurrentQuantity(tank.getCapacity());
+        return tankRepository.save(tank);
+    }
+
+    public List<Tank> getAllTanks() {
+        return tankRepository.findAll();
+    }
 }

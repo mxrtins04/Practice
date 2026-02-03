@@ -175,6 +175,26 @@ public class TankServiceTest {
     }
 
     @Test
+    void shouldIncreaseAvailableCapacity_WhenFuelIsDispensed() {
+        Fuel fuel = new Fuel(1L, "Petrol", new BigDecimal("1.50"));
+        Tank tank = new Tank(1L, 10000.0, 5000.0, fuel);
+        Tank updatedTank = new Tank(1L, 10000.0, 3000.0, fuel);
+
+        when(tankRepository.findById(1L)).thenReturn(Optional.of(tank), Optional.of(updatedTank));
+        when(tankRepository.save(any(Tank.class))).thenReturn(updatedTank);
+
+        Double initialCapacity = tankService.getAvailableCapacity(1L);
+        Tank result = tankService.dispenseFuel(1L, 2000.0);
+        Double finalCapacity = tankService.getAvailableCapacity(1L);
+
+        assertEquals(5000.0, initialCapacity);
+        assertEquals(7000.0, finalCapacity);
+        assertEquals(3000.0, result.getCurrentQuantity());
+        verify(tankRepository, org.mockito.Mockito.times(3)).findById(1L);
+        verify(tankRepository).save(any(Tank.class));
+    }
+
+    @Test
     void shouldThrowException_WhenDispensingMoreThanAvailable() {
         Fuel fuel = new Fuel(1L, "Petrol", new BigDecimal("1.50"));
         Tank tank = new Tank(1L, 10000.0, 1000.0, fuel);
