@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
@@ -16,7 +18,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findByFuelAttendantIdAndTransactionTimeBetween(
         Long fuelAttendantId, LocalDateTime startTime, LocalDateTime endTime);
     
-    BigDecimal sumAmountByFuelAttendantId(Long fuelAttendantId);
+    @Query("SELECT SUM(t.amount) FROM Transaction t WHERE t.fuelAttendant.id = :attendantId")
+    BigDecimal sumAmountByFuelAttendantId(@Param("attendantId") Long attendantId);
     
     List<Transaction> findByDispenserId(Long dispenserId);
     
