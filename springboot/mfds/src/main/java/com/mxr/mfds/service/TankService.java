@@ -62,7 +62,7 @@ public class TankService {
 
         if (tank.getCurrentQuantity() < litersToDispense) {
             throw new IllegalArgumentException("Insufficient fuel in tank. Available: " + tank.getCurrentQuantity()
-                    + "L, Requested: " + litersToDispense + "L");
+                    + "Liters, Requested: " + litersToDispense + "Liters");
         }
 
         Double newQuantity = tank.getCurrentQuantity() - litersToDispense;

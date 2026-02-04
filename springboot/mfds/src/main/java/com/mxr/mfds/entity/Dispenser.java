@@ -21,9 +21,6 @@ public class Dispenser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "dispenser_tanks", joinColumns = @JoinColumn(name = "dispenser_id"), inverseJoinColumns = @JoinColumn(name = "tank_id"))
     private List<Tank> tanks;
