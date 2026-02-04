@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mxr.mfds.entity.Dispenser;
+import com.mxr.mfds.entity.FuelAttendant;
 import com.mxr.mfds.entity.Tank;
 import com.mxr.mfds.repository.DispenserRepository;
 import com.mxr.mfds.repository.TankRepository;
 import com.mxr.mfds.service.TankService;
+import com.mxr.mfds.service.FuelAttendantService;
 
 @Service
 public class DispenserService {
@@ -22,6 +24,9 @@ public class DispenserService {
 
     @Autowired
     private TankService tankService;
+
+    @Autowired
+    private FuelAttendantService fuelAttendantService;
 
     public Dispenser getDispenserById(Long id) {
         return dispenserRepository.findById(id)
@@ -59,5 +64,34 @@ public class DispenserService {
     public List<Tank> getAllTanksForDispenser(Long dispenserId) {
         getDispenserById(dispenserId);
         return tankRepository.findAll();
+    }
+
+    public Dispenser assignAttendantToDispenser(Long dispenserId, Long attendantId) {
+        Dispenser dispenser = getDispenserById(dispenserId);
+        FuelAttendant attendant = fuelAttendantService.getAttendantById(attendantId);
+
+        if (dispenser.isAttendantAssigned()) {
+            throw new IllegalArgumentException("Dispenser already has an attendant assigned: " + dispenserId);
+        }
+
+        dispenser.assignAttendant(attendant);
+        return dispenserRepository.save(dispenser);
+    }
+
+    public Dispenser removeAttendantFromDispenser(Long dispenserId) {
+        Dispenser dispenser = getDispenserById(dispenserId);
+        dispenser.removeAttendant();
+        return dispenserRepository.save(dispenser);
+    }
+
+    public FuelAttendant getCurrentAttendantForDispenser(Long dispenserId) {
+        Dispenser dispenser = getDispenserById(dispenserId);
+
+        if (!dispenser.isAttendantAssigned()) {
+            throw new IllegalArgumentException("No attendant assigned to dispenser: " + dispenserId);
+        }
+
+        return dispenser.getCurrentAttendant();
+    }
     }
 }
