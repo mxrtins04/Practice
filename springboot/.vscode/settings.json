@@ -1,3 +1,4 @@
 {
-  "workbench.preferredHighContrastColorTheme": "Tokyo Night"
+  "workbench.preferredHighContrastColorTheme": "Tokyo Night",
+  "java.debug.settings.onBuildFailureProceed": true
 }

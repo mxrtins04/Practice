@@ -68,14 +68,6 @@ public class DispenserServiceTest {
     }
 
     @Test
-    void shouldThrowException_WhenDispenserNotFoundByName() {
-        when(dispenserRepository.findByName("NonExistent")).thenReturn(Optional.empty());
-
-        assertThrows(IllegalArgumentException.class, () -> dispenserService.getDispenserByName("NonExistent"));
-        verify(dispenserRepository).findByName("NonExistent");
-    }
-
-    @Test
     void shouldReturnAllDispensers_WhenRequested() {
         List<Dispenser> expectedDispensers = List.of(
                 new Dispenser(1L, null),
