@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.mxr.mfds.entity.Dispenser;
 import com.mxr.mfds.entity.Fuel;
 import com.mxr.mfds.entity.FuelAttendant;
+import com.mxr.mfds.entity.Tank;
 import com.mxr.mfds.entity.Transaction;
 import com.mxr.mfds.repository.TransactionRepository;
 

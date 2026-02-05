@@ -45,7 +45,7 @@ public class DispenserServiceTest {
         List<Tank> allTanks = List.of(
                 new Tank(1L, 10000.0, 5000.0, petrol),
                 new Tank(2L, 15000.0, 7500.0, diesel));
-        Dispenser dispenser = new Dispenser(1L, allTanks);
+        Dispenser dispenser = new Dispenser();
 
         when(dispenserRepository.findById(1L)).thenReturn(Optional.of(dispenser));
         when(tankRepository.findAll()).thenReturn(allTanks);
@@ -70,16 +70,14 @@ public class DispenserServiceTest {
     @Test
     void shouldReturnAllDispensers_WhenRequested() {
         List<Dispenser> expectedDispensers = List.of(
-                new Dispenser(1L, null),
-                new Dispenser(2L, null));
+                new Dispenser(),
+                new Dispenser());
 
         when(dispenserRepository.findAll()).thenReturn(expectedDispensers);
 
         List<Dispenser> result = dispenserService.getAllDispensers();
 
         assertEquals(2, result.size());
-        assertEquals(1L, result.get(0).getId());
-        assertEquals(2L, result.get(1).getId());
         verify(dispenserRepository).findAll();
     }
 

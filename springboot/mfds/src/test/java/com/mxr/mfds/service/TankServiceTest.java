@@ -210,7 +210,7 @@ public class TankServiceTest {
         when(tankRepository.findById(1L)).thenReturn(Optional.of(tank));
         when(tankRepository.save(any(Tank.class))).thenReturn(updatedTank);
 
-        Tank result = tankService.refillTank(1L, 2000.0);
+        Tank result = tankService.refillTank("Petrol", 2000.0);
 
         assertEquals(5000.0, result.getCurrentQuantity());
         verify(tankRepository).findById(1L);
@@ -224,7 +224,7 @@ public class TankServiceTest {
 
         when(tankRepository.findById(1L)).thenReturn(Optional.of(tank));
 
-        assertThrows(IllegalArgumentException.class, () -> tankService.refillTank(1L, 3000.0));
+        assertThrows(IllegalArgumentException.class, () -> tankService.refillTank("Petrol", 3000.0));
         verify(tankRepository).findById(1L);
     }
 

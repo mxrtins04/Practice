@@ -1,6 +1,7 @@
 package com.mxr.mfds.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,8 +71,8 @@ public class TankService {
         return tankRepository.save(tank);
     }
 
-    public Tank refillTank(Long tankId, Double litersToAdd) {
-        Tank tank = getTankById(tankId);
+    public Tank refillTank(String name, Double litersToAdd) {
+        Tank tank = getTankByFuelName(name);
 
         if (litersToAdd <= 0) {
             throw new IllegalArgumentException("Liters to add must be positive");

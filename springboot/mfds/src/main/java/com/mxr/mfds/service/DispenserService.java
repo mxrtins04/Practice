@@ -34,7 +34,7 @@ public class DispenserService {
     }
 
     public List<Dispenser> getAllDispensers() {
-        return dispenserRepository.findAll();
+        return dispenserRepository.findAll();  
     }
 
     public Tank dispenseFuel(String fuelName, Double litersToDispense) {
@@ -93,5 +93,5 @@ public class DispenserService {
 
         return dispenser.getCurrentAttendant();
     }
-    }
 }
+
