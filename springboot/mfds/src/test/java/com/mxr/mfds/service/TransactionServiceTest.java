@@ -108,18 +108,18 @@ public class TransactionServiceTest {
                 LocalDateTime.now(), fuel, attendant, dispenser);
 
         when(dispenserService.getDispenserById(1L)).thenReturn(dispenser);
-        when(fuelService.getFuelById(1L)).thenReturn(fuel);
+        when(fuelService.getFuelByName("Petrol")).thenReturn(fuel);
         when(dispenserService.dispenseFuel("Petrol", 50.0)).thenReturn(tank);
         when(transactionRepository.save(any(Transaction.class))).thenReturn(expectedTransaction);
 
-        Transaction result = transactionService.processSale(1L, 1L, 50.0);
+        Transaction result = transactionService.processSale(1L, "Petrol", 50.0);
 
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals(50.0, result.getLiters());
         assertEquals(new BigDecimal("75.00"), result.getAmount());
         verify(dispenserService).getDispenserById(1L);
-        verify(fuelService).getFuelById(1L);
+        verify(fuelService).getFuelByName("Petrol");
         verify(dispenserService).dispenseFuel("Petrol", 50.0);
         verify(transactionRepository).save(any(Transaction.class));
     }
@@ -131,8 +131,9 @@ public class TransactionServiceTest {
 
         when(dispenserService.getDispenserById(1L)).thenReturn(dispenser);
 
-        assertThrows(IllegalArgumentException.class, () -> transactionService.processSale(1L, 1L, 50.0));
+        assertThrows(IllegalArgumentException.class, () -> transactionService.processSale(1L, "Petrol", 50.0));
         verify(dispenserService).getDispenserById(1L);
+    
     }
 
     @Test
@@ -209,11 +210,11 @@ public class TransactionServiceTest {
                 new Transaction(),
                 new Transaction());
 
-        when(transactionRepository.findByFuelId(1L)).thenReturn(expectedTransactions);
+        when(transactionRepository.findByFuelName("Petrol")).thenReturn(expectedTransactions);
 
-        List<Transaction> result = transactionService.getTransactionsByFuel(1L);
+        List<Transaction> result = transactionService.getTransactionsByFuel("Petrol");
 
         assertEquals(2, result.size());
-        verify(transactionRepository).findByFuelId(1L);
+        verify(transactionRepository).findByFuelName("Petrol");
     }
 }

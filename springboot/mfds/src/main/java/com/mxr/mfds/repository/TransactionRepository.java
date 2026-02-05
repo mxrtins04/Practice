@@ -23,5 +23,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     
     List<Transaction> findByDispenserId(Long dispenserId);
     
-    List<Transaction> findByFuelId(Long fuelId);
+    List<Transaction> findByFuelName(String fuelName);
 }

@@ -45,7 +45,7 @@ public class TransactionService {
                 .orElseThrow(() -> new IllegalArgumentException("Transaction not found with id: " + id));
     }
 
-    public Transaction processSale(Long dispenserId, Long fuelId, Double liters) {
+    public Transaction processSale(Long dispenserId, String fuelName, Double liters) {
         Dispenser dispenser = dispenserService.getDispenserById(dispenserId);
 
         if (!dispenser.isAttendantAssigned()) {
@@ -53,7 +53,7 @@ public class TransactionService {
         }
 
         FuelAttendant attendant = dispenser.getCurrentAttendant();
-        Fuel fuel = fuelService.getFuelById(fuelId);
+        Fuel fuel = fuelService.getFuelByName(fuelName);
 
         if (liters == null || liters <= 0) {
             throw new IllegalArgumentException("Liters must be a positive number");
@@ -74,8 +74,8 @@ public class TransactionService {
         return transactionRepository.findByDispenserId(dispenserId);
     }
 
-    public List<Transaction> getTransactionsByFuel(Long fuelId) {
-        return transactionRepository.findByFuelId(fuelId);
+    public List<Transaction> getTransactionsByFuel(String fuelName) {
+        return transactionRepository.findByFuelName(fuelName);
     }
 
     public List<Transaction> getTransactionsByDateRange(LocalDateTime startTime, LocalDateTime endTime) {
