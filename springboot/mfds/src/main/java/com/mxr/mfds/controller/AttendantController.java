@@ -1,6 +1,7 @@
 package com.mxr.mfds.controller;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,14 @@ public class AttendantController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @PostMapping("/register")
+    public String registerAttendant(@RequestBody Map<String, Object> userMap) {
+        String name = (String) userMap.get("name");
+        String id = (String) userMap.get("id");
+        String age = (String) userMap.get("age");
+        return name + "," + id + "," + age;
     }
 
     @GetMapping("/status")

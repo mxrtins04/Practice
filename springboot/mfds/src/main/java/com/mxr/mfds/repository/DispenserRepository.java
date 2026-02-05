@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface DispenserRepository extends JpaRepository<Dispenser, Long> {
     
-    Optional<Dispenser> findByName(String name);
+    Optional<Dispenser> findById(Long id);
     
-    boolean existsByName(String name);
+    boolean existsById(Long id);
 }
