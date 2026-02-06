@@ -39,7 +39,7 @@ public class TaskService {
         
         Task savedTask = taskRepository.save(task);
         
-        if (Boolean.TRUE.equals(savedTask.getIsComplete())) {
+        if (savedTask.isComplete()) {
             migrateTaskToCompleted(savedTask);
         }
         

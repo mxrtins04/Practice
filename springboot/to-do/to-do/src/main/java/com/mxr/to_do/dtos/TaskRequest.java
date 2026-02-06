@@ -16,5 +16,5 @@ public class TaskRequest {
     @NotNull(message = "Priority is required")
     private Priority priority;
     
-    private Boolean isComplete = false;
+    private boolean isComplete = false;
 }
