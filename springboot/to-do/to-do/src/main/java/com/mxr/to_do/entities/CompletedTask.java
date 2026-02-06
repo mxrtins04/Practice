@@ -21,6 +21,9 @@ public class CompletedTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "original_task_id")
+    private Long originalTaskId;
+
     @Column(nullable = false)
     private String title;
 

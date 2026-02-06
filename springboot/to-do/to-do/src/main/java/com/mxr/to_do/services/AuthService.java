@@ -26,6 +26,7 @@ public class AuthService {
         String encodedPassword = PasswordEncoder.encode(userRequest.getPassword());
         
         User user = User.builder()
+                .name(userRequest.getName())
                 .username(userRequest.getUsername())
                 .email(userRequest.getEmail())
                 .password(encodedPassword)

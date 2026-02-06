@@ -9,7 +9,6 @@ public record CompletedTaskResponse(
         String title,
         String description,
         Priority priority,
-        Long originalTaskId,
-        LocalDateTime completedAt
+        Long originalTaskId
 ) {
 }

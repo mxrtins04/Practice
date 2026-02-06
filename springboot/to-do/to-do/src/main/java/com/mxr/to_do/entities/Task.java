@@ -32,7 +32,7 @@ public class Task {
     private Priority priority;
 
     @Column(nullable = false)
-    private boolean isComplete = false;
+    private boolean isComplete;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
