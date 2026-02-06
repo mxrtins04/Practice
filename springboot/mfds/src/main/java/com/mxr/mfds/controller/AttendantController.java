@@ -59,13 +59,13 @@ public class AttendantController {
         }
     }
 
-    @PostMapping("/register")
-    public String registerAttendant(@RequestBody Map<String, Object> userMap) {
-        String name = (String) userMap.get("name");
-        String id = (String) userMap.get("id");
-        String age = (String) userMap.get("age");
-        return name + "," + id + "," + age;
-    }
+    // @PostMapping("/register")
+    // public String registerAttendant(@RequestBody Map<String, Object> userMap) {
+    //     String name = (String) userMap.get("name");
+    //     String id = (String) userMap.get("id");
+    //     String age = (String) userMap.get("age");
+    //     return name + "," + id + "," + age;
+    // }
 
     @GetMapping("/status")
     public ResponseEntity<?> getStatus(@RequestParam Long attendantId) {

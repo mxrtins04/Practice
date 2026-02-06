@@ -1,3 +1,5 @@
+-- Debug: This should appear in logs
+SELECT 'Loading default data...';
 -- Insert 1 default fuel attendant
 INSERT INTO fuel_attendants (id, name) VALUES (1, 'Default Attendant');
 
