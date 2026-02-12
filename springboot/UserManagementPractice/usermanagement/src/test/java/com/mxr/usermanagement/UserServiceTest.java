@@ -24,7 +24,8 @@ public class UserServiceTest {
 
 
     @Test
-    void testDatabaseIsEmptyInitially() {
+    void when() {
+
         assertTrue(userRepo.findAll().isEmpty());
     }
 
