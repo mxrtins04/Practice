@@ -2,9 +2,14 @@ package com.mxr.usermanagement;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import static org.mockito.ArgumentMatchers.any;
+
+import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -27,6 +32,9 @@ public class ControllerTest {
     @Mock
     UserService userService;
 
+    @Mock
+    Clock clock;
+
     @InjectMocks
     private UserController userController;
 
@@ -34,6 +42,8 @@ public class ControllerTest {
     
     private CreateUserDTO request;
     private Response response;
+
+    private final Instant now = Intant.now();
 
 
     @BeforeEach
@@ -63,6 +73,19 @@ public class ControllerTest {
         );
     }
 
-    
+    @Test
+    public void shouldReturn201WithUserResponse_whenCreatingUser(){
+        when(userService.CreateService(any(request.class))).thenReturn(response);
+
+        mockMvc.perform(post("api/users")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(request))
+    )
+
+    .andExpect(status().isCreated())
+    .andExpect()
+
+
+    }
 
 }
