@@ -43,5 +43,18 @@ public class UserService {
         }   
         return userRepo.getUserById(number);
     }
+
+    public void updateUserDetailUser(Long id, CreateUserDTO userRequestDTO) {
+        if(userRepo.getUserById(id) == null){
+            throw new UserNotFoundException(id);
+        }
+        User user = userRepo.findById(id).get();
+        user.setName(userRequestDTO.getName());
+        user.setEmail(userRequestDTO.getEmail());
+        user.setUserName(userRequestDTO.getUsername());
+        user.setUpdatedAt(LocalDateTime.now());
+        
+        userRepo.saveUser(user);
+    }
 }
 

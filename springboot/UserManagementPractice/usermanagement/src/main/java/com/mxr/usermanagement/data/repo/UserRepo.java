@@ -8,7 +8,9 @@ import java.util.List;
 public interface UserRepo extends JpaRepository<User, Long> {
     boolean existsByUsername(String username);
 
-    void saveUser(User user);
+    User saveUser(User user){
+        
+    };
 
     User getUserById(Long id);
 
