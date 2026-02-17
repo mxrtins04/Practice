@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.validation.FieldError;
-import com.mxr.usermanagement.exceptions.ErrorResponse;
-
+import org.springframework.validation.FieldError; 
 @ControllerAdvice
 public class GlobalExceptionHandler {
     
