@@ -5,6 +5,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import com.mxr.usermanagement.Service.UserService;
 import com.mxr.usermanagement.data.dto.requests.CreateUserDTO;
 import com.mxr.usermanagement.data.repo.UserRepo;
+import com.mxr.usermanagement.exceptions.UserNotFoundException;
 import com.mxr.usermanagement.model.User;
 import com.mxr.usermanagement.data.dto.requests.Response;
 
@@ -52,6 +54,12 @@ public class UserServiceTest {
 
         assertTrue(user.getName() == validRequestDTO.getName());
         assertTrue(user != null);
+    }
+
+    @Test
+    void shouldReturnUserNotFoundException_whenUserDoesNotExist() {
+
+        assertThrows(UserNotFoundException.class, () -> userService.getUserById(1L));
     }
 
 }

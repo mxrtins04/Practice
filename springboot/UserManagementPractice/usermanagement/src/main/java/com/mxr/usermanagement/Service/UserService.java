@@ -7,6 +7,7 @@ import com.mxr.usermanagement.data.dto.requests.CreateUserDTO;
 import com.mxr.usermanagement.data.dto.requests.Response;
 import com.mxr.usermanagement.model.User;
 import com.mxr.usermanagement.data.repo.UserRepo;
+import com.mxr.usermanagement.exceptions.UserNotFoundException;
 public class UserService {
     UserRepo userRepo;
     
@@ -34,6 +35,13 @@ public class UserService {
         .updatedAt(user.getUpdatedAt())
         .build();
         return response;
+    }
+
+    public User getUserById(long number) {
+        if(userRepo.getUserById(number) == null){
+            throw new UserNotFoundException(number);
+        }   
+        return userRepo.getUserById(number);
     }
 }
 
