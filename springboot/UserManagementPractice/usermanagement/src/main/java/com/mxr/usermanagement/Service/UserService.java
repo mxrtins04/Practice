@@ -1,6 +1,13 @@
+
+/*
+Statelesness in this service means that no data is stored or persisted during or after any of these operations. 
+If session data lived in a local field, it would become stateful i.e Each time the service a new instance of the class is called and the 
+data that existed in the previous instance is lost
+*/
 package com.mxr.usermanagement.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -9,6 +16,9 @@ import com.mxr.usermanagement.data.dto.requests.Response;
 import com.mxr.usermanagement.model.User;
 import com.mxr.usermanagement.data.repo.UserRepo;
 import com.mxr.usermanagement.exceptions.UserNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 
 
@@ -16,10 +26,13 @@ import com.mxr.usermanagement.exceptions.UserNotFoundException;
 public class UserService {
 
 
-    private UserRepo userRepo;
+    private static final UserRepo userRepo;
+    private static final UserServiceProperties userServiceProperties;
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo, UserServiceProperties userServiceProperties) {
         this.userRepo = userRepo;
+        this.userServiceProperties = userServiceProperties;
     }
     
 
@@ -36,7 +49,13 @@ public class UserService {
         return response;
     }
 
-    public Response mapToResponseDTO(User user){
+    public List<Response> getAllUsers(){
+        List<User> users = userRepo.getAllUsers();
+        logger.info("Fetching users. Max users per page is {}", userServiceProperties.getMaxUsersPerPage());
+        return users.stream().limit(userServiceProperties.getMaxUsersPerPage()).map(this::mapToResponseDTO).toList();
+    }
+
+    private Response mapToResponseDTO(User user){
         Response response  = Response.builder()
         .name(user.getName())
         .email(user.getEmail())
@@ -53,7 +72,7 @@ public class UserService {
             throw new UserNotFoundException(number);
         }   
 
-        
+        logger.info("User found with id: {}", number);
         return mapToResponseDTO(user);
     }
 
@@ -68,7 +87,11 @@ public class UserService {
         user.setUpdatedAt(LocalDateTime.now());
         
         userRepo.saveUser(user);
+        logger.info("User updated with id: {}", id);
         
     }
 }
+
+
+
 
