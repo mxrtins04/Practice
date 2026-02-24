@@ -1,20 +1,30 @@
 package com.mxr.usermanagement.Service;
 
 import java.time.LocalDateTime;
-import java.util.function.BooleanSupplier;
+
+import org.springframework.stereotype.Service;
 
 import com.mxr.usermanagement.data.dto.requests.CreateUserDTO;
 import com.mxr.usermanagement.data.dto.requests.Response;
 import com.mxr.usermanagement.model.User;
 import com.mxr.usermanagement.data.repo.UserRepo;
 import com.mxr.usermanagement.exceptions.UserNotFoundException;
+
+
+
+@Service
 public class UserService {
-    UserRepo userRepo;
+
+
+    private UserRepo userRepo;
+
+    public UserService(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
     
 
     public Response createUser(CreateUserDTO validRequestDTO) {
         User user = new User();
-        user.setId(user.getId());       
         user.setName(validRequestDTO.getName());
         user.setEmail(validRequestDTO.getEmail());
         user.setUserName(validRequestDTO.getUsername());
@@ -37,18 +47,21 @@ public class UserService {
         return response;
     }
 
-    public User getUserById(long number) {
-        if(userRepo.getUserById(number) == null){
+    public Response getUserById(long number) {
+        User user = userRepo.getUserById(number);
+        if(user == null){
             throw new UserNotFoundException(number);
         }   
-        return userRepo.getUserById(number);
+
+        
+        return mapToResponseDTO(user);
     }
 
     public void updateUserDetailUser(Long id, CreateUserDTO userRequestDTO) {
-        if(userRepo.getUserById(id) == null){
+        User user = userRepo.getUserById(id);
+        if(user == null){
             throw new UserNotFoundException(id);
         }
-        User user = userRepo.findById(id).get();
         user.setName(userRequestDTO.getName());
         user.setEmail(userRequestDTO.getEmail());
         user.setUserName(userRequestDTO.getUsername());

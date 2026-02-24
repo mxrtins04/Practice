@@ -3,11 +3,14 @@ package com.mxr.usermanagement;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDateTime;
 
+//import org.apache.tomcat.util.http.parser.MediaType;
+import org.springframework.http.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,7 +46,7 @@ public class ControllerTest {
     private CreateUserDTO request;
     private Response response;
 
-    private final Instant now = Intant.now();
+    private final Instant now = Instant.now();
 
 
     @BeforeEach
@@ -72,10 +75,10 @@ public class ControllerTest {
             LocalDateTime.now()
         );
     }
-
+    
     @Test
     public void shouldReturn201WithUserResponse_whenCreatingUser(){
-        when(userService.CreateService(any(request.class))).thenReturn(response);
+        when(userService.createUser(any(CreateUserDTO.class))).thenReturn(response);
 
         mockMvc.perform(post("api/users")
         .contentType(MediaType.APPLICATION_JSON)
