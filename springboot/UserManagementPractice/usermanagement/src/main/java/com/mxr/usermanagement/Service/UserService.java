@@ -1,8 +1,10 @@
 
 /*
-Statelesness in this service means that no data is stored or persisted during or after any of these operations. 
+Statelesness in this service means that no data is stored or persisted during or after any of these operations. Right now all data required to perform any operation is passed as a parameter(request).  
+For this to be scaled horizontally, the data should be stored in a database or a distributed cache.
 If session data lived in a local field, it would become stateful i.e Each time the service a new instance of the class is called and the 
-data that existed in the previous instance is lost
+data that existed in the previous instance is lost. Not just that, other instances dont know what happens in other instances, leading to 
+unpredictable behavior.
 */
 package com.mxr.usermanagement.Service;
 
@@ -26,8 +28,8 @@ import org.slf4j.LoggerFactory;
 public class UserService {
 
 
-    private static final UserRepo userRepo;
-    private static final UserServiceProperties userServiceProperties;
+    private final UserRepo userRepo;
+    private final UserServiceProperties userServiceProperties;
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public UserService(UserRepo userRepo, UserServiceProperties userServiceProperties) {
@@ -76,7 +78,7 @@ public class UserService {
         return mapToResponseDTO(user);
     }
 
-    public void updateUserDetailUser(Long id, CreateUserDTO userRequestDTO) {
+    public Response updateUserDetailUser(Long id, CreateUserDTO userRequestDTO) {
         User user = userRepo.getUserById(id);
         if(user == null){
             throw new UserNotFoundException(id);
