@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.validation.FieldError; 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -53,5 +53,17 @@ public class GlobalExceptionHandler {
         );
 
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @SuppressWarnings("deprecation")
+    @ExceptionHandler(UserLimitExceededException.class)
+    public ResponseEntity<ErrorResponse> handleUserLimitExceededException(UserLimitExceededException ex){
+        ErrorResponse errorResponse = new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.UNPROCESSABLE_ENTITY.value(),
+            ex.getMessage(),
+            null
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }

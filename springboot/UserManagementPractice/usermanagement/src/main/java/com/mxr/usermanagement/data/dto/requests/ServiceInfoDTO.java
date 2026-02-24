@@ -1,7 +1,9 @@
 package com.mxr.usermanagement.data.dto.requests;
 
 import lombok.Getter;
+import lombok.Builder;
 
+@Builder
 @Getter
 public class ServiceInfoDTO {
     private String serviceName;
