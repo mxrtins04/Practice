@@ -2,20 +2,21 @@ package com.mxr.usermanagement.data.repo;
 
 import com.mxr.usermanagement.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 
 public interface UserRepo extends JpaRepository<User, Long> {
-    boolean existsByUsername(String username);
+    boolean existsByuserName(String username);
 
-    User saveUser(User user);
+    User save(User user);
 
     User getUserById(Long id);
 
-    User getUserByUsername(String username);
-    List<User> getUsersByName(String name);
+    User getUserByuserName(String username);
 
-    List<User> getAllUsers();
+    List<User> getUsersByName(String name);
 
     void deleteUserById(Long id);
 }

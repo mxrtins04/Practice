@@ -40,7 +40,7 @@ public class UserController {
             @RequestParam(defaultValue = "id") String sortBy) {
         
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        Page<Response> users = (Page<Response>) userService.getAllUsers();
+        Page<Response> users = userService.getAllUsers(pageable);
         return ResponseEntity.ok(users);
     }
     
@@ -48,7 +48,7 @@ public class UserController {
     public ResponseEntity<Response> updateUser(
             @PathVariable Long id,
             @Valid @RequestBody CreateUserDTO requestDTO) {
-        Response response = userService.updateUserDetailUser(id, requestDTO);
+        Response response = userService.updateUserDetail(id, requestDTO);
         return ResponseEntity.ok(response);
     }
     

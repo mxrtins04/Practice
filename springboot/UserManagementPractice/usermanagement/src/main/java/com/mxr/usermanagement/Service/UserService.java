@@ -19,6 +19,10 @@ import com.mxr.usermanagement.data.dto.requests.Response;
 import com.mxr.usermanagement.model.User;
 import com.mxr.usermanagement.data.repo.UserRepo;
 import com.mxr.usermanagement.exceptions.UserNotFoundException;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,15 +51,16 @@ public class UserService {
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
         
-        userRepo.saveUser(user);
+        userRepo.save(user);
         Response response = mapToResponseDTO(user);
         return response;
     }
 
-    public List<Response> getAllUsers(){
-        List<User> users = userRepo.getAllUsers();
+    public Page<Response> getAllUsers(Pageable pageable){
+        Pageable page = PageRequest.of(pageable.getPageNumber(), userServiceProperties.getMaxUsersPerPage(), pageable.getSort());
+        Page<User> users = userRepo.findAll(page);
         logger.info("Fetching users. Max users per page is {}", userServiceProperties.getMaxUsersPerPage());
-        return users.stream().limit(userServiceProperties.getMaxUsersPerPage()).map(this::mapToResponseDTO).toList();
+        return users.map(this::mapToResponseDTO);
     }
 
     private Response mapToResponseDTO(User user){
@@ -79,7 +84,7 @@ public class UserService {
         return mapToResponseDTO(user);
     }
 
-    public Response updateUserDetailUser(Long id, CreateUserDTO userRequestDTO) {
+    public Response updateUserDetail(Long id, CreateUserDTO userRequestDTO) {
         User user = userRepo.getUserById(id);
         if(user == null){
             throw new UserNotFoundException(id);
@@ -89,7 +94,7 @@ public class UserService {
         user.setUserName(userRequestDTO.getUsername());
         user.setUpdatedAt(LocalDateTime.now());
         
-        userRepo.saveUser(user);
+        userRepo.save(user);
         logger.info("User updated with id: {}", id);
         return mapToResponseDTO(user);
         
@@ -105,7 +110,6 @@ public class UserService {
         logger.info("User deleted with id: {}", id);
     }
 }
-
 
 
 
