@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.mxr.usermanagement.config.UserServiceProperties;
 import com.mxr.usermanagement.data.dto.requests.CreateUserDTO;
 import com.mxr.usermanagement.data.dto.requests.Response;
 import com.mxr.usermanagement.model.User;
@@ -90,7 +91,18 @@ public class UserService {
         
         userRepo.saveUser(user);
         logger.info("User updated with id: {}", id);
+        return mapToResponseDTO(user);
         
+    }
+
+
+    public void deleteUser(Long id) {
+        User user = userRepo.getById(id);
+        if(user == null){
+            throw new UserNotFoundException(id);
+        }
+        userRepo.deleteUserById(id);
+        logger.info("User deleted with id: {}", id);
     }
 }
 

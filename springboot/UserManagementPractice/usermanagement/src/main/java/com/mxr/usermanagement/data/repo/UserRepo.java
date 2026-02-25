@@ -8,12 +8,14 @@ import java.util.List;
 public interface UserRepo extends JpaRepository<User, Long> {
     boolean existsByUsername(String username);
 
-    User saveUser(User user){
-        
-    };
+    User saveUser(User user);
 
     User getUserById(Long id);
 
     User getUserByUsername(String username);
     List<User> getUsersByName(String name);
+
+    List<User> getAllUsers();
+
+    void deleteUserById(Long id);
 }
