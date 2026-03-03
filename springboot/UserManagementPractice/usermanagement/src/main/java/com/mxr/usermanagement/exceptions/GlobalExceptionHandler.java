@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
             HttpStatus.BAD_REQUEST.value(),
             "Validation failed",
             errors
-        );
+        ); 
 
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     };
@@ -79,4 +79,5 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
     }
+ 
 }
