@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import lombok.Getter;
 
 @Getter
-@Component
+
 @Configuration
 
 public class InstanceConfig {

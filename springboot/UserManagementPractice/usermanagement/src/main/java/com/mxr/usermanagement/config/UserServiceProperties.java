@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "user.service")
 @Component
 @Data
+
 public class UserServiceProperties {
     private String serviceName;
     private String version;

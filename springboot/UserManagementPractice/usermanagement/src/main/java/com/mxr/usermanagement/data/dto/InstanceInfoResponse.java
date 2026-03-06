@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class InstanceInfoResponse {
     private String instanceId;
     private String region;
-    private final String status = "UP";
+    private static final String status = "UP";
     private float uptimeSeconds;
-    private final String serviceName = "devarena-user-service";
+    private static final String serviceName = "devarena-user-service";
 
 }
